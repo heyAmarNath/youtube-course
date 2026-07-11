@@ -1,0 +1,3 @@
+"use client";
+export type CourseTab = "today" | "videos";
+export function CourseTabs({ active, onChange }: { active: CourseTab; onChange: (tab: CourseTab) => void }) { return <div role="tablist" className="flex border-b border-[#cfcdc4]"><button role="tab" aria-selected={active === "today"} onClick={() => onChange("today")} className={`px-4 py-3 text-sm font-medium ${active === "today" ? "border-b-2 border-[#f54e00] text-[#26251e]" : "text-[#807d72]"}`}>Today’s Plan</button><button role="tab" aria-selected={active === "videos"} onClick={() => onChange("videos")} className={`px-4 py-3 text-sm font-medium ${active === "videos" ? "border-b-2 border-[#f54e00] text-[#26251e]" : "text-[#807d72]"}`}>All Videos</button></div>; }

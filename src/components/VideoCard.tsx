@@ -1,0 +1,6 @@
+"use client";
+import * as Checkbox from "@radix-ui/react-checkbox";
+import { Check } from "lucide-react";
+import { formatDuration } from "@/lib/duration";
+import type { Video } from "@/types/youtube";
+export function VideoCard({ video, complete, onToggle }: { video: Video; complete: boolean; onToggle: () => void }) { return <article className={`flex gap-3 rounded-lg border border-[#e6e5e0] bg-white p-3 ${complete ? "opacity-60" : ""}`}><img src={video.thumbnail.url} alt="" className="aspect-video w-28 shrink-0 rounded-md object-cover sm:w-40"/><div className="flex min-w-0 flex-1 items-center justify-between gap-3"><div className="min-w-0"><p className={`text-sm font-semibold leading-snug sm:text-base ${complete ? "line-through" : ""}`}>{video.title}</p><p className="mt-1 text-xs text-[#807d72]">Lesson {video.position + 1} · {formatDuration(video.durationSeconds)}</p></div><Checkbox.Root checked={complete} onCheckedChange={onToggle} aria-label={`Mark ${video.title} as completed`} className="flex h-6 w-6 shrink-0 items-center justify-center rounded border-2 border-[#cfcdc4] bg-white text-white data-[state=checked]:border-[#1f8a65] data-[state=checked]:bg-[#1f8a65]"><Checkbox.Indicator><Check className="h-4 w-4"/></Checkbox.Indicator></Checkbox.Root></div></article>; }

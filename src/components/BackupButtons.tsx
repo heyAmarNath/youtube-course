@@ -1,0 +1,6 @@
+"use client";
+import { ChangeEvent } from "react";
+import { Download, Upload } from "lucide-react";
+import { isCourseData } from "@/lib/storage";
+import type { CourseData } from "@/types/youtube";
+export function BackupButtons({ onExport, onImport }: { onExport: () => void; onImport: (data: CourseData, replace: boolean) => void }) { async function read(event: ChangeEvent<HTMLInputElement>) { const file = event.target.files?.[0]; if (!file) return; try { const data = JSON.parse(await file.text()) as CourseData; if (!isCourseData(data)) throw new Error(); const replace = window.confirm("Replace existing courses? Select Cancel to merge this backup."); onImport(data, replace); } catch { window.alert("This file is not a valid YouTube Course backup."); } event.target.value = ""; } return <div className="flex flex-wrap gap-2"><button onClick={onExport} className="inline-flex h-10 items-center gap-2 rounded-md border border-[#cfcdc4] bg-white px-4 text-sm"><Download className="h-4 w-4"/>Export progress</button><label className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-md border border-[#cfcdc4] bg-white px-4 text-sm"><Upload className="h-4 w-4"/>Import progress<input type="file" accept="application/json" onChange={read} className="hidden"/></label></div>; }

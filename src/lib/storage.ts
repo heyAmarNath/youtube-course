@@ -1,0 +1,9 @@
+import type { CourseData, CourseProgress, StoredCourse } from "@/types/youtube";
+const KEY = "youtube-course-data";
+const LEGACY_KEY = "youtube-course-progress";
+export function getCourseData(): CourseData { if (typeof window === "undefined") return { courses: {} }; try { const data = JSON.parse(localStorage.getItem(KEY) ?? "{\"courses\":{}}") as CourseData; return data.courses ? data : { courses: {} }; } catch { return { courses: {} }; } }
+export function setCourseData(data: CourseData): void { if (typeof window === "undefined") return; try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { /* LocalStorage can be unavailable or full; UI state remains usable. */ } }
+export function isCourseData(value: unknown): value is CourseData { if (!value || typeof value !== "object" || !("courses" in value)) return false; const courses = (value as { courses: unknown }).courses; return Boolean(courses) && typeof courses === "object" && !Array.isArray(courses); }
+export function getProgress(playlistId: string): CourseProgress { const course = getCourseData().courses[playlistId]; if (course) return { completedVideos: course.completedVideos }; if (typeof window === "undefined") return { completedVideos: [] }; try { return (JSON.parse(localStorage.getItem(LEGACY_KEY) ?? "{}") as Record<string, CourseProgress>)[playlistId] ?? { completedVideos: [] }; } catch { return { completedVideos: [] }; } }
+export function upsertCourse(course: StoredCourse): void { const data = getCourseData(); setCourseData({ courses: { ...data.courses, [course.playlistId]: course } }); }
+export function setProgress(playlistId: string, progress: CourseProgress): void { const course = getCourseData().courses[playlistId]; if (course) upsertCourse({ ...course, completedVideos: progress.completedVideos }); }

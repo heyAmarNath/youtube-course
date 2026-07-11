@@ -1,0 +1,3 @@
+import { Gauge } from "lucide-react";
+import { calculatePlaybackDuration, formatDuration } from "@/lib/duration";
+export function DurationStats({ seconds }: { seconds: number }) { return <section className="rounded-xl border border-[#e6e5e0] bg-white p-6"><Gauge className="h-5 w-5 text-[#f54e00]"/><p className="mt-4 text-sm text-[#807d72]">Total course duration</p><div className="mt-3 grid grid-cols-3 divide-x divide-[#e6e5e0] text-center">{[1, 1.5, 2].map((speed) => <div key={speed}><p className="text-[11px] font-semibold uppercase tracking-[.88px] text-[#807d72]">{speed}x</p><p className="mt-1 text-sm font-semibold">{formatDuration(calculatePlaybackDuration(seconds, speed))}</p></div>)}</div></section>; }

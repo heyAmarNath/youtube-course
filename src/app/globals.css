@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { @apply border-[#e6e5e0]; }
+  body { @apply min-h-screen bg-[#f7f7f4] text-[#26251e] antialiased; font-family: Inter, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  button, input { font: inherit; }
+}
+
+html.dark body { background: #1c1c18; color: #f7f7f4; }
+html.dark .bg-white { background-color: #282720 !important; }
+html.dark .bg-\[\#f7f7f4\] { background-color: #1c1c18 !important; }
+html.dark .text-\[\#26251e\] { color: #f7f7f4 !important; }
+html.dark .text-\[\#5a5852\], html.dark .text-\[\#807d72\] { color: #bbb7aa !important; }
+html.dark .border-\[\#e6e5e0\], html.dark .border-\[\#cfcdc4\] { border-color: #4a483f !important; }
+html.dark .bg-\[\#efeee8\] { background-color: #3c3a32 !important; }
+html.dark input { color: #f7f7f4; background: #282720; }

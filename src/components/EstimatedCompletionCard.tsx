@@ -1,0 +1,2 @@
+import { CalendarDays } from "lucide-react";
+export function EstimatedCompletionCard({ days }: { days: number }) { return <section className="rounded-xl border border-[#e6e5e0] bg-white p-6"><CalendarDays className="h-5 w-5 text-[#f54e00]"/><p className="mt-4 text-sm text-[#807d72]">Estimated completion</p><p className="mt-1 text-2xl font-normal tracking-tight">{days === 0 ? "Today" : `${days} ${days === 1 ? "day" : "days"} left`}</p></section>; }
