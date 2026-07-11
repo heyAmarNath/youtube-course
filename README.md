@@ -2,6 +2,8 @@
 
 A focused, browser-only YouTube playlist course tracker. Import a public playlist to see its total duration at 1x, 1.5x, and 2x speed, then tick off lessons as you complete them. Completion data stays in your browser's LocalStorage—there is no account, server, or database.
 
+Try - https://youtube-course-3vr.pages.dev/
+
 ## Setup
 
 1. Install dependencies: `npm install`
